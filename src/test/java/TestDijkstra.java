@@ -74,7 +74,7 @@ public class TestDijkstra {
     }
 
     private void addEdge(String laneId, int sourceLocNo, int destLocNo,
-                         int duration) {
+                         double duration) {
         Edge lane = new Edge(laneId, nodes.get(sourceLocNo), nodes.get(destLocNo), duration);
         edges.add(lane);
     }
