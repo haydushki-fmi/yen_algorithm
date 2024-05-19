@@ -33,4 +33,8 @@ public class Edge {
     public String toString() {
         return source + " -> " + destination + " (" + weight + ")";
     }
+
+    public boolean compareBySourceAndDestination(Vertex vertex, Vertex destination) {
+        return source.equals(vertex) && this.destination.equals(destination);
+    }
 }

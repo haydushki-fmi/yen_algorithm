@@ -1,10 +1,12 @@
 import graph.Edge;
 import graph.Graph;
+import graph.Path;
 import graph.Vertex;
 import graph.algorithms.Dijkstra;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,11 +20,12 @@ public class TestDijkstra {
 
         LinkedList<Vertex> expectedPath = new LinkedList<>(List.of(nodes.get(0), nodes.get(3), nodes.get(2), nodes.get(5)));
 
-        LinkedList<Vertex> path = dijkstra.getShortestPath(nodes.get(0), nodes.get(5), null);
+        Path path = dijkstra.getShortestPath(nodes.get(0), nodes.get(5), null);
 
-        assertEquals(path, expectedPath);
+        assertEquals(expectedPath, path.getVertices());
+        assertEquals(5, path.getWeight());
 
-        for (Vertex vertex : path) {
+        for (Vertex vertex : path.getVertices()) {
             System.out.println(vertex);
         }
     }
@@ -33,11 +36,12 @@ public class TestDijkstra {
         Dijkstra dijkstra = new Dijkstra(graph);
         LinkedList<Vertex> expectedPath = new LinkedList<>(List.of(nodes.get(0), nodes.get(3), nodes.get(4), nodes.get(5)));
 
-        LinkedList<Vertex> path = dijkstra.getShortestPath(nodes.get(0), nodes.get(5), edges.get(6));
+        Path path = dijkstra.getShortestPath(nodes.get(0), nodes.get(5), new HashSet<>(List.of(edges.get(6))));
 
-        assertEquals(path, expectedPath);
+        assertEquals(expectedPath, path.getVertices());
+        assertEquals(7, path.getWeight());
 
-        for (Vertex vertex : path) {
+        for (Vertex vertex : path.getVertices()) {
             System.out.println(vertex);
         }
     }

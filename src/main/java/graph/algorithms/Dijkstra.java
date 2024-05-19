@@ -2,6 +2,7 @@ package graph.algorithms;
 
 import graph.Edge;
 import graph.Graph;
+import graph.Path;
 import graph.Vertex;
 
 import java.util.*;
@@ -24,7 +25,7 @@ public class Dijkstra {
      * @param target Target vertex.
      * @return A LinkedList of vertices for the shortest path.
      */
-    public LinkedList<Vertex> getShortestPath(Vertex source, Vertex target, Edge excluded) {
+    public Path getShortestPath(Vertex source, Vertex target, Set<Edge> excluded) {
         settledNodes = new HashSet<Vertex>();
         unsettledNodes = new HashSet<Vertex>();
         distance = new HashMap<Vertex, Double>();
@@ -39,7 +40,8 @@ public class Dijkstra {
             unsettledNodes.remove(node);
             findMinimalDistances(node, excluded);
         }
-        return this.calculatePath(target);
+
+        return new Path(this.calculatePath(target), this.getShortestDistance(target));
     }
 
     /**
@@ -63,7 +65,7 @@ public class Dijkstra {
         return path;
     }
 
-    private void findMinimalDistances(Vertex node, Edge excluded) {
+    private void findMinimalDistances(Vertex node, Set<Edge> excluded) {
         List<Vertex> adjacentNodes = getNeighbors(node);
         for (Vertex target : adjacentNodes) {
             if (getShortestDistance(target) > getShortestDistance(node)
@@ -77,8 +79,8 @@ public class Dijkstra {
 
     }
 
-    private double getDistance(Vertex node, Vertex target, Edge excluded) {
-        if (excluded != null && node.equals(excluded.getSource()) && target.equals(excluded.getDestination())) {
+    private double getDistance(Vertex node, Vertex target, Set<Edge> excluded) {
+        if (excluded != null && excluded.stream().anyMatch(x -> x.compareBySourceAndDestination(node, target))) {
             return Double.MAX_VALUE;
         }
 
