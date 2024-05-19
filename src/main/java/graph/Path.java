@@ -11,6 +11,9 @@ public class Path {
     private final double weight;
 
     public LinkedList<Vertex> getVertices() {
+        if (vertices == null) {
+            return new LinkedList<>();
+        }
         return vertices;
     }
 
@@ -53,6 +56,9 @@ public class Path {
 
     public List<Edge> getEdges(Graph graph) {
         LinkedList<Edge> edges = new LinkedList<>();
+        if (this.vertices == null) {
+            return edges;
+        }
         for (int i = 0; i < this.vertices.size() - 1; i++) {
             int finalI = i;
             edges.add(graph.getEdges().stream().filter(edge -> edge.compareBySourceAndDestination(this.vertices.get(finalI), this.vertices.get(finalI + 1))).toList().getFirst());
