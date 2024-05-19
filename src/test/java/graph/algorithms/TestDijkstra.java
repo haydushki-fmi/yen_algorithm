@@ -1,8 +1,9 @@
+package graph.algorithms;
+
 import graph.Edge;
 import graph.Graph;
 import graph.Path;
 import graph.Vertex;
-import graph.algorithms.Dijkstra;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ public class TestDijkstra {
         this.initializeGraph();
         Dijkstra dijkstra = new Dijkstra(graph);
 
-        LinkedList<Vertex> expectedPath = new LinkedList<>(List.of(nodes.get(0), nodes.get(3), nodes.get(2), nodes.get(5)));
+        LinkedList<Vertex> expectedPath = new LinkedList<>(List.of(vertices.get(0), vertices.get(3), vertices.get(2), vertices.get(5)));
 
-        Path path = dijkstra.getShortestPath(nodes.get(0), nodes.get(5), null);
+        Path path = dijkstra.getShortestPath(vertices.get(0), vertices.get(5), null);
 
         assertEquals(expectedPath, path.getVertices());
         assertEquals(5, path.getWeight());
@@ -34,9 +35,9 @@ public class TestDijkstra {
     void testDijkstraCalculatesShortestPathWithExcludedEdge() {
         this.initializeGraph();
         Dijkstra dijkstra = new Dijkstra(graph);
-        LinkedList<Vertex> expectedPath = new LinkedList<>(List.of(nodes.get(0), nodes.get(3), nodes.get(4), nodes.get(5)));
+        LinkedList<Vertex> expectedPath = new LinkedList<>(List.of(vertices.get(0), vertices.get(3), vertices.get(4), vertices.get(5)));
 
-        Path path = dijkstra.getShortestPath(nodes.get(0), nodes.get(5), new HashSet<>(List.of(edges.get(6))));
+        Path path = dijkstra.getShortestPath(vertices.get(0), vertices.get(5), new HashSet<>(List.of(edges.get(6))));
 
         assertEquals(expectedPath, path.getVertices());
         assertEquals(7, path.getWeight());
@@ -46,20 +47,20 @@ public class TestDijkstra {
         }
     }
 
-    private List<Vertex> nodes;
+    private List<Vertex> vertices;
     private List<Edge> edges;
     private Graph graph;
 
     private void initializeGraph() {
-        nodes = new ArrayList<>();
+        vertices = new ArrayList<>();
         edges = new ArrayList<>();
 
-        nodes.add(new Vertex("C", "C"));
-        nodes.add(new Vertex("D", "D"));
-        nodes.add(new Vertex("F", "F"));
-        nodes.add(new Vertex("E", "E"));
-        nodes.add(new Vertex("G", "G"));
-        nodes.add(new Vertex("H", "H"));
+        vertices.add(new Vertex("C", "C"));
+        vertices.add(new Vertex("D", "D"));
+        vertices.add(new Vertex("F", "F"));
+        vertices.add(new Vertex("E", "E"));
+        vertices.add(new Vertex("G", "G"));
+        vertices.add(new Vertex("H", "H"));
 
         addEdge("CD", 0, 1, 3);
         addEdge("CE", 0, 3, 2);
@@ -73,9 +74,8 @@ public class TestDijkstra {
         graph = new Graph(edges);
     }
 
-    private void addEdge(String laneId, int sourceLocNo, int destLocNo,
-                         double duration) {
-        Edge lane = new Edge(laneId, nodes.get(sourceLocNo), nodes.get(destLocNo), duration);
-        edges.add(lane);
+    private void addEdge(String edgeId, int sourceIndex, int destinationIndex, double weight) {
+        Edge edge = new Edge(edgeId, vertices.get(sourceIndex), vertices.get(destinationIndex), weight);
+        edges.add(edge);
     }
 }
