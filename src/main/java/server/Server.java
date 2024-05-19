@@ -106,7 +106,6 @@ public class Server {
 
                 Graph graph = new Graph(edges);
                 Yen yen = new Yen(graph);
-//                out.println("Graph: " + graph.toString());
                 List<Path> result = yen.calculateKShortestPaths(getVertex(startVertex), getVertex(targetVertex), k);
                 out.println(result.toString());
 
