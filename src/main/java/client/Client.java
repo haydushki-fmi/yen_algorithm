@@ -21,7 +21,7 @@ public class Client {
 
             // object of scanner class
             Scanner sc = new Scanner(System.in);
-            String line = null;
+            String line;
             sc.useDelimiter("\n");
 
             line = readFromUser(sc, "Enter the number of edges, start, target vertex and K (separated by space):\t");

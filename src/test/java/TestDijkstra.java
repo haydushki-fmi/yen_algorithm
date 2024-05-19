@@ -51,8 +51,8 @@ public class TestDijkstra {
     private Graph graph;
 
     private void initializeGraph() {
-        nodes = new ArrayList<Vertex>();
-        edges = new ArrayList<Edge>();
+        nodes = new ArrayList<>();
+        edges = new ArrayList<>();
 
         nodes.add(new Vertex("C", "C"));
         nodes.add(new Vertex("D", "D"));

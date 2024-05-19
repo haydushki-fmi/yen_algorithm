@@ -38,7 +38,6 @@ public class Yen {
             Path minPath = null;
             for (int j = 0; j < rootPath.getVertices().size() - 1; j++) {
                 Vertex root = paths.get(i - 1).getVertices().get(j);
-                Vertex nextAfterRoot = paths.get(i - 1).getVertices().get(j + 1);
                 Path untilRootPath = dijkstra.getShortestPath(source, root, null);
 
                 // Get the edges which have been previously used in a shortest path and exclude the ones going out from the root vertex

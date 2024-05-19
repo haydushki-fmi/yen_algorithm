@@ -26,10 +26,10 @@ public class Dijkstra {
      * @return A LinkedList of vertices for the shortest path.
      */
     public Path getShortestPath(Vertex source, Vertex target, Set<Edge> excluded) {
-        settledNodes = new HashSet<Vertex>();
-        unsettledNodes = new HashSet<Vertex>();
-        distance = new HashMap<Vertex, Double>();
-        parent = new HashMap<Vertex, Vertex>();
+        settledNodes = new HashSet<>();
+        unsettledNodes = new HashSet<>();
+        distance = new HashMap<>();
+        parent = new HashMap<>();
 
         distance.put(source, 0.0);
         unsettledNodes.add(source);
@@ -54,7 +54,7 @@ public class Dijkstra {
         if (parent.get(target) == null) {
             return null;
         }
-        LinkedList<Vertex> path = new LinkedList<Vertex>();
+        LinkedList<Vertex> path = new LinkedList<>();
         Vertex current = target;
         path.add(current);
         while (parent.get(current) != null) {
@@ -94,7 +94,7 @@ public class Dijkstra {
     }
 
     private List<Vertex> getNeighbors(Vertex node) {
-        List<Vertex> neighbors = new ArrayList<Vertex>();
+        List<Vertex> neighbors = new ArrayList<>();
         for (Edge edge : graph.getEdges()) {
             if (edge.getSource().equals(node)
                     && !isSettled(edge.getDestination())) {

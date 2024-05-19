@@ -1,8 +1,8 @@
 package graph;
 
 public class Vertex implements Comparable<Vertex> {
-    private String label;
-    private String id;
+    private final String label;
+    private final String id;
 
     public String getLabel() {
         return label;
