@@ -73,7 +73,7 @@ public class Path {
         if (this.vertices == null) {
             return "EMPTY PATH";
         }
-        return vertices.toString();
+        return vertices.toString() + "(" + this.weight + ")";
     }
 }
 

@@ -12,4 +12,9 @@ public class Graph {
     public Graph(List<Edge> edges) {
         this.edges = edges;
     }
+
+    @Override
+    public String toString() {
+        return this.edges.toString();
+    }
 }
